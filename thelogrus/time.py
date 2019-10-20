@@ -39,8 +39,3 @@ def human_time_converter():
     for line in sys.stdin:
       print(human_time(int(line)))
       sys.exit(0)
-
-
-if __name__ == '__main__':
-  print('This is a library, not a stand alone script')
-  sys.exit(1)
