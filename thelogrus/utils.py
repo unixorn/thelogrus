@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright 2017 Joe Block <jpb@unixorn.net>
+# Copyright 2017-2019 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,46 +24,15 @@ import os
 import subprocess
 
 
-def getCustomLogger(name, logLevel, logFormat='%(asctime)s %(levelname)-9s:%(name)s:%(module)s:%(funcName)s: %(message)s'):
-  '''
-  Set up logging
-
-  :param str name: What log level to set
-  :param str logLevel: What log level to use
-  :param str logFormat: Format string for logging
-  :rtype: logger
-  '''
-  assert isinstance(logFormat, basestring), ("logFormat must be a string but is %r" % logFormat)
-  assert isinstance(logLevel, basestring), ("logLevel must be a string but is %r" % logLevel)
-  assert isinstance(name, basestring), ("name must be a string but is %r" % name)
-
-  validLogLevels = ['CRITICAL', 'DEBUG', 'ERROR', 'INFO', 'WARNING']
-
-  if not logLevel:
-    logLevel = 'DEBUG'
-
-  # If they don't specify a valid log level, err on the side of verbosity
-  if logLevel.upper() not in validLogLevels:
-    logLevel = 'DEBUG'
-
-  numericLevel = getattr(logging, logLevel.upper(), None)
-  if not isinstance(numericLevel, int):
-    raise ValueError("Invalid log level: %s" % logLevel)
-
-  logging.basicConfig(level=numericLevel, format=logFormat)
-  logger = logging.getLogger(name)
-  return logger
-
-
 def mkdir_p(path):
   '''
-  Mimic `mkdir -p` since os module doesn't provide one.
+  Mimic `mkdir -p`
 
   :param str path: directory to create
   '''
   assert isinstance(path, basestring), ("path must be a string but is %r" % path)
   try:
-    os.makedirs(path)
+    os.makedirs(path, exist_ok=True)
   except OSError as exception:
     if exception.errno != errno.EEXIST:
       raise
@@ -80,17 +49,14 @@ def squashDicts(*dict_args):
   return result
 
 
-def systemCall(command):
+def run(command):
   '''
   Run a command and return stdout.
-
-  Would be better to use subprocess.check_output, but this works on 2.6,
-  which is still the system Python on CentOS 7.
-
-  :param str command: Command to run
-  :rtype: str
   '''
-  assert isinstance(command, basestring), ("command must be a string but is type %r" % command)
-
-  p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
-  return p.stdout.read()
+  if not (isinstance(command, str) or isinstance(command, list)):
+    raise TypeError('%r is not a str or list' % command)
+  if isinstance(command, str):
+    cmd = command.split()
+  else:
+    cmd = command
+  return subprocess.check_output(cmd, universal_newlines=True)
