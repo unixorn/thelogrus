@@ -34,13 +34,13 @@ def humanTimeConverter():
   Cope whether we're passed a time in seconds on the command line or via stdin
   '''
   if len(sys.argv) == 2:
-    print humanFriendlyTime(seconds=int(sys.argv[1]))
+    print(humanFriendlyTime(seconds=int(sys.argv[1])))
   else:
     for line in sys.stdin:
-      print humanFriendlyTime(int(line))
+      print(humanFriendlyTime(int(line)))
       sys.exit(0)
 
 
 if __name__ == '__main__':
-  print 'This is a library, not a stand alone script'
+  print('This is a library, not a stand alone script')
   sys.exit(1)
