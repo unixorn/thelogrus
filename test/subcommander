@@ -18,9 +18,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
 
 from thelogrus.cli import exec_subcommand
 
+def _usage(message):
+  '''
+  Custom usage printer
+  '''
+  print("%s" % sys.argv[0])
+  print("Called as %s" % (' '.join(sys.argv)))
+  print("Oh look, a custom usage message.")
+  print("Attempted to find an executable using all the permutations of %s with no luck." % '-'.join(sys.argv))
+  print("%s" % message)
+
 
 if __name__ == '__main__':
-  exec_subcommand()
+  exec_subcommand(unfound=_usage)

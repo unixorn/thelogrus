@@ -24,19 +24,34 @@ import os
 import sys
 
 
-def exec_subcommand():
+def _usage(message):
+  '''
+  Default usage/error print function for exec_subcommand.
+
+  :param str message: What to interpolate into our output.
+  '''
+  print("%s" % sys.argv[0])
+  print("Called as %s" % (' '.join(sys.argv)))
+  print("Attempted to find an executable using all the permutations of %s with no luck." % '-'.join(sys.argv))
+  print("%s" % message)
+
+
+def exec_subcommand(unfound=_usage):
   '''
   Process the command line arguments and run the appropriate subcommand.
 
-  We want to be able to do git-style handoffs to subcommands where if we
-  do `foo blah foo bar` and the executable foo-blah-foo exists, we'll call
-  it with the argument bar.
+  The goal is to be able to do git-style handoffs to subcommands where
+  if we do `foo blah foo bar` and the executable foo-blah-foo exists,
+  we'll call it with the argument bar.
 
   We deliberately don't do anything with the arguments other than hand
   them off to the subcommand. Subcommands are responsible for their
-  own argument parsing.
+  own argument parsing and validity checks.
 
-  Use os.execvp so that subcommands inherit our stdin.
+  Use os.execvp so that subcommands inherit our stdin, and we don't
+  have to handle returning their error codes.
+
+  :param function unfound: Function to call if we can't find a suitable subcommand
   '''
   try:
     (command, args) = find_subcommand(sys.argv)
@@ -44,10 +59,10 @@ def exec_subcommand():
     # If we can't construct a subcommand from sys.argv, it'll still be able
     # to find this driver script, and re-running ourself isn't useful.
     if os.path.basename(command) == sys.argv[0]:
-      print("Could not find a subcommand for %s" % ' '.join(sys.argv))
+      unfound("Could not find a subcommand for %s" % ' '.join(sys.argv))
       sys.exit(1)
   except Exception as e:
-    print(str(e))
+    unfound(str(e))
     sys.exit(1)
   args.insert(0, command)
   sys.stdout.flush()
@@ -77,10 +92,10 @@ def find_subcommand(args):
   :rtype: tuple
   :raises StandardError: if the args can't be matched to an executable subcommand
   '''
+  command = None
   # If the only command we find is the first element of args, we've found the
   # driver script itself and re-executing it will cause an infinite loop, so
   # don't even look at the first element on its own.
-  command = None
   for i in range(len(args) - 1):
     command = '-'.join(args[:(len(args) - i)])
     command_arguments = args[len(args) - i:]

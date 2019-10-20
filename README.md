@@ -31,9 +31,11 @@ Takes a value in seconds either from stdin or as arg 1 and converts it to a more
 
 ## logrus.cli
 
-### exec_subcommand
+### exec_subcommand(unfound)
 
 Creates a `git`-style driver command. If your script is named `foo`, and is run as `foo bar baz` and there is an executable in your `$PATH` named `foo-bar`, it will call `foo-bar` with `baz` as the command line argument.
+
+`unfound` is an optional argument that should be a function pointer and will be called if `exec_subcommand` can't find a suitable subcommand. Mainly useful for you to have a custom usage message.
 
 Example usage:
 
@@ -49,8 +51,19 @@ Example usage:
 from thelogrus.cli import exec_subcommand
 
 
+def _usage(message):
+  '''
+  Custom usage printer
+  '''
+  print("%s" % sys.argv[0])
+  print("Called as %s" % (' '.join(sys.argv)))
+  print("Oh look, a custom usage message.")
+  print("Attempted to find an executable using all the permutations of %s with no luck." % '-'.join(sys.argv))
+  print("%s" % message)
+
+
 if __name__ == '__main__':
-  exec_subcommand()
+  exec_subcommand(unfound=_usage)
 ```
 
 ### find_subcommand(args)
