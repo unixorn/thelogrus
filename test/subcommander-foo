@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# entrypoint script for logrus test container
+# Script skeleton
 #
 # Copyright 2019, Joe Block <jpb@unixorn.net>
 #
@@ -18,4 +18,5 @@
 
 set -o pipefail
 
-exec $@
+echo 'in foo'
+echo "Args: $@"

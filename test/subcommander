@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 #
-# entrypoint script for logrus test container
+# Test script for thelogrus
+#
+# Confirms that thelogrus.cli.exec_subcommand works as expected
 #
 # Copyright 2019, Joe Block <jpb@unixorn.net>
 #
@@ -16,6 +18,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -o pipefail
 
-exec $@
+from thelogrus.cli import exec_subcommand
+
+
+if __name__ == '__main__':
+  exec_subcommand()
