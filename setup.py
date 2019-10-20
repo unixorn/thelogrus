@@ -38,7 +38,7 @@ def run(command):
 
 
 PACKAGE_NAME = 'thelogrus'
-PACKAGE_VERSION = "0.2.%s" % (run('git rev-list HEAD --count').strip())
+PACKAGE_VERSION = "0.3.%s" % (run('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
