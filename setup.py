@@ -1,6 +1,6 @@
 # The Logrus
 #
-# Copyright 2015-2017 Joe Block <jpb@unixorn.net>
+# Copyright 2015-2019 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ def systemCall(command):
   return p.stdout.read()
 
 
-name = 'logrus'
+name = 'thelogrus'
 version = "0.2.%s" % (systemCall('git rev-list HEAD --count').strip())
 
 
@@ -68,15 +68,15 @@ setup(
   author="Joe Block",
   author_email="jpb@unixorn.net",
   description="The Logrus is a collection of random utility functions",
-  url="https://github.com/unixorn/logrus",
+  url="https://github.com/unixorn/thelogrus",
   packages=find_packages(),
   version=version,
-  download_url="https://github.com/unixorn/logrus/tarball/%s" % version,
+  download_url="https://github.com/unixorn/thelogrus/tarball/%s" % version,
   classifiers=[
     "Development Status :: 3 - Alpha",
     "Operating System :: POSIX",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 2.6",
+    "Programming Language :: Python :: 3.7",
     "Topic :: Software Development :: Libraries :: Python Modules",
   ],
   cmdclass={
