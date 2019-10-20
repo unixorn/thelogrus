@@ -53,7 +53,7 @@ def run(command):
   '''
   Run a command and return stdout.
   '''
-  if not (isinstance(command, str) or isinstance(command, list)):
+  if not isinstance(command, (list, str)):
     raise TypeError('%r is not a str or list' % command)
   if isinstance(command, str):
     cmd = command.split()

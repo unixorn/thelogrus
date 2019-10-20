@@ -24,19 +24,21 @@ import subprocess
 from setuptools import setup, find_packages, Command
 
 
-def systemCall(command):
+def run(command):
   '''
   Run a command and return stdout.
-
-  Would be better to use subprocess.check_output, but this works on 2.6,
-  which is still the system Python on CentOS 7.
   '''
-  p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
-  return p.stdout.read()
+  if not isinstance(command, (list, str)):
+    raise TypeError('%r is not a str or list' % command)
+  if isinstance(command, str):
+    cmd = command.split()
+  else:
+    cmd = command
+  return subprocess.check_output(cmd, universal_newlines=True)
 
 
-name = 'thelogrus'
-version = "0.2.%s" % (systemCall('git rev-list HEAD --count').strip())
+PACKAGE_NAME = 'thelogrus'
+PACKAGE_VERSION = "0.2.%s" % (run('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
@@ -48,14 +50,17 @@ class CleanCommand(Command):
 
 
   def initialize_options(self):
+    '''Initialize clean options'''
     self.cwd = None
 
 
   def finalize_options(self):
+    '''Finalize clean options'''
     self.cwd = os.getcwd()
 
 
   def run(self):
+    '''Clean up working directory'''
     assert os.getcwd() == self.cwd, "Must be in package root: %s" % self.cwd
     if os.path.isdir('build'):
       shutil.rmtree('build')
@@ -64,14 +69,14 @@ class CleanCommand(Command):
 
 
 setup(
-  name=name,
+  name=PACKAGE_NAME,
+  version=PACKAGE_VERSION,
   author="Joe Block",
   author_email="jpb@unixorn.net",
   description="The Logrus is a collection of random utility functions",
   url="https://github.com/unixorn/thelogrus",
   packages=find_packages(),
-  version=version,
-  download_url="https://github.com/unixorn/thelogrus/tarball/%s" % version,
+  download_url="https://github.com/unixorn/thelogrus/tarball/%s" % PACKAGE_VERSION,
   classifiers=[
     "Development Status :: 3 - Alpha",
     "Operating System :: POSIX",
@@ -84,8 +89,11 @@ setup(
   },
   entry_points={
     "console_scripts": [
-      "human-time = %s.time:humanTimeConverter" % name,
+      "human-time = %s.time:human_time_converter" % PACKAGE_NAME,
     ]
   },
+  install_requires=[
+    'dateutils'
+  ],
   keywords=["devops", "utility"],
 )
