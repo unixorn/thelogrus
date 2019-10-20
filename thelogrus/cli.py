@@ -99,3 +99,16 @@ def is_program(name):
   :rtype: bool
   '''
   return distutils.spawn.find_executable(name) is not None
+
+
+def run(command):
+  '''
+  Run a command and return stdout.
+  '''
+  if not isinstance(command, (list, str)):
+    raise TypeError('%r is not a str or list' % command)
+  if isinstance(command, str):
+    cmd = command.split()
+  else:
+    cmd = command
+  return subprocess.check_output(cmd, universal_newlines=True)

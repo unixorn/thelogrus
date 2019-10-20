@@ -47,16 +47,3 @@ def squashDicts(*dict_args):
   for dictionary in dict_args:
     result.update(dictionary)
   return result
-
-
-def run(command):
-  '''
-  Run a command and return stdout.
-  '''
-  if not isinstance(command, (list, str)):
-    raise TypeError('%r is not a str or list' % command)
-  if isinstance(command, str):
-    cmd = command.split()
-  else:
-    cmd = command
-  return subprocess.check_output(cmd, universal_newlines=True)
