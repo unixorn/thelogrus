@@ -1,9 +1,9 @@
 # logrus
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GitHub stars](https://img.shields.io/github/stars/unixorn/logrus.svg)](https://github.com/unixorn/logrus/stargazers)
-[![Code Climate](https://codeclimate.com/github/unixorn/logrus/badges/gpa.svg)](https://codeclimate.com/github/unixorn/logrus)
-[![Issue Count](https://codeclimate.com/github/unixorn/logrus/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/logrus)
+[![GitHub stars](https://img.shields.io/github/stars/unixorn/thelogrus.svg)](https://github.com/unixorn/thelogrus/stargazers)
+[![Code Climate](https://codeclimate.com/github/unixorn/thelogrus/badges/gpa.svg)](https://codeclimate.com/github/unixorn/thelogrus)
+[![Issue Count](https://codeclimate.com/github/unixorn/thelogrus/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/thelogrus)
 
 
 The logrus is a collection of random utility functions. Nothing in here
