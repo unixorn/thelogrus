@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
-# Copyright 2017 Joe Block <jpb@unixorn.net>
+# Copyright 2017-2019 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,29 +18,24 @@
 Time utility functions
 '''
 import sys
-from dateutil.relativedelta import relativedelta as deltaTime
+from dateutil.relativedelta import relativedelta
 
-def humanTime(seconds):
+def human_time(seconds):
   '''
   Convert seconds to something more human-friendly
   '''
   intervals = ['days', 'hours', 'minutes', 'seconds']
-  x = deltaTime(seconds=seconds)
-  return ' '.join('{} {}'.format(getattr(x, k), k) for k in intervals if getattr(x, k))
+  chunked_time = relativedelta(seconds=seconds)
+  return ' '.join('{} {}'.format(getattr(chunked_time, k), k) for k in intervals if getattr(chunked_time, k))
 
 
-def humanTimeConverter():
+def human_time_converter():
   '''
   Cope whether we're passed a time in seconds on the command line or via stdin
   '''
   if len(sys.argv) == 2:
-    print humanFriendlyTime(seconds=int(sys.argv[1]))
+    print(human_time(seconds=int(sys.argv[1])))
   else:
     for line in sys.stdin:
-      print humanFriendlyTime(int(line))
+      print(human_time(int(line)))
       sys.exit(0)
-
-
-if __name__ == '__main__':
-  print 'This is a library, not a stand alone script'
-  sys.exit(1)

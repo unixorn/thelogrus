@@ -31,7 +31,42 @@ Takes a value in seconds either from stdin or as arg 1 and converts it to a more
 
 ## logrus.cli
 
-### findSubCommand(args)
+### exec_subcommand(unfound)
+
+Creates a `git`-style driver command. If your script is named `foo`, and is run as `foo bar baz` and there is an executable in your `$PATH` named `foo-bar`, it will call `foo-bar` with `baz` as the command line argument.
+
+`unfound` is an optional argument that should be a function pointer and will be called if `exec_subcommand` can't find a suitable subcommand. Mainly useful for you to have a custom usage message.
+
+Example usage:
+
+```
+#!/usr/bin/env python3
+#
+# Test script for thelogrus
+#
+# Confirms that thelogrus.cli.exec_subcommand works as expected
+#
+# Copyright 2019, Joe Block <jpb@unixorn.net>
+
+from thelogrus.cli import exec_subcommand
+
+
+def _usage(message):
+  '''
+  Custom usage printer
+  '''
+  print("%s" % sys.argv[0])
+  print("Called as %s" % (' '.join(sys.argv)))
+  print("Oh look, a custom usage message.")
+  print("Attempted to find an executable using all the permutations of %s with no luck." % '-'.join(sys.argv))
+  print("%s" % message)
+
+
+if __name__ == '__main__':
+  exec_subcommand(unfound=_usage)
+```
+
+### find_subcommand(args)
 
 Given a list ['foo','bar', 'baz'], attempts to create a command name in the
 format 'foo-bar-baz'. If that command exists, we run it. If it doesn't, we
@@ -44,17 +79,20 @@ have a driver script, foo, and subcommand scripts foo-bar and foo-baz, and when
 the user types `foo bar foobar` we find the foo-bar script and run it as
 `foo-bar foobar`
 
-:param list|tuple args: list to try and convert to a command args pair
-:returns: command and arguments list
-:rtype: tuple
-:raises StandardError: if the args can't be matched to an executable subcommand
-
 Example usage:
 
 ```
-def fooDriver():
-  """
-  Process the command line arguments and run the appropriate foo subcommand.
+#!/usr/bin/env python3
+
+import os
+import subprocess
+import sys
+from thelogrus.cli import find_subcommand
+
+
+def subcommander_driver():
+  '''
+  Process the command line arguments and run the appropriate subcommand.
 
   We want to be able to do git-style handoffs to subcommands where if we
   do `foo blah foo bar` and the executable foo-blah-foo exists, we'll call
@@ -63,30 +101,39 @@ def fooDriver():
   We deliberately don't do anything with the arguments other than hand
   them off to the foo subcommand. Subcommands are responsible for their
   own argument parsing.
-  """
+  '''
   try:
-    (command, args) = findSubCommand(sys.argv)
+    (command, args) = find_subcommand(sys.argv)
 
     # If we can't construct a subcommand from sys.argv, it'll still be able
-    # to find this foo driver script, and re-running ourself isn't useful.
-    if os.path.basename(command) == 'foo':
-      print "Could not find a subcommand for %s" % ' '.join(sys.argv)
+    # to find this driver script, and re-running ourself isn't useful.
+    if os.path.basename(command) == sys.argv[0]:
+      print("Could not find a subcommand for %s" % ' '.join(sys.argv))
       sys.exit(1)
-  except StandardError:
-    print "Could not find a subcommand for %s" % ' '.join(sys.argv)
+  except Exception as e:
+    print(str(e))
     sys.exit(1)
-  check_call([command] + args)
+  subprocess.check_call([command] + args)
 
+
+if __name__ == '__main__':
+  subcommander_driver()
 ```
 
-### isProgram(name)
+### is_program(name)
 
-Search for a given program in `$PATH`, and return True if it exists and
+Search for a given program in `$PATH`, and return `True` if it exists and
 is executable.
 
-:param str name: Name of program to search for
-:returns: whether or not the program can be found in $PATH
-:rtype: bool
+### run(command)
+
+Runs a command (either a str or list) and returns its `stdout`.
+
+## logrus.logging
+
+### getCustomLogger(name, logLevel)
+
+Returns a custom logger with nicely formatted output.
 
 ## logrus.time
 
@@ -95,14 +142,6 @@ is executable.
 Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
 
 ## logrus.utils
-
-### getCustomLogger(name, logLevel)
-
-Returns a custom logger with nicely formatted output.
-
-:param str name: What log level to set
-:param str logLevel: What log level to use
-:rtype: logger
 
 ### mkdir_p(path)
 
