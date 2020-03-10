@@ -5,6 +5,30 @@
 [![Code Climate](https://codeclimate.com/github/unixorn/thelogrus/badges/gpa.svg)](https://codeclimate.com/github/unixorn/thelogrus)
 [![Issue Count](https://codeclimate.com/github/unixorn/thelogrus/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/thelogrus)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [logrus](#logrus)
+- [Installation](#installation)
+- [License](#license)
+- [Included Commands](#included-commands)
+  - [human-time](#human-time)
+- [Included functions](#included-functions)
+  - [logrus.cli](#logruscli)
+    - [exec_subcommand(unfound)](#exec_subcommandunfound)
+    - [find_subcommand(args)](#find_subcommandargs)
+    - [is_program(name)](#is_programname)
+    - [run(command)](#runcommand)
+  - [logrus.logging](#logruslogging)
+    - [getCustomLogger(name, logLevel)](#getcustomloggername-loglevel)
+  - [logrus.time](#logrustime)
+    - [humanTime(seconds)](#humantimeseconds)
+  - [logrus.utils](#logrusutils)
+    - [mkdir_p(path)](#mkdir_ppath)
+    - [squashDicts(*dict_args)](#squashdictsdict_args)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 The logrus is a collection of random utility functions. Nothing in here is all that special, they're just yet another implementation of functions I've rewritten at every job to use in various utility scripts. By open sourcing them now, I'm hoping to not have to write them yet again.
 
