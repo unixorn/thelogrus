@@ -13,7 +13,7 @@ sourcing them now, I'm hoping to not have to write them again.
 
 # Installation
 
-`pip install logrus`
+`pip install thelogrus`
 
 # License
 
