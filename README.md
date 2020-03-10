@@ -6,10 +6,7 @@
 [![Issue Count](https://codeclimate.com/github/unixorn/thelogrus/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/thelogrus)
 
 
-The logrus is a collection of random utility functions. Nothing in here
-is all that special, they're just yet another implementation of functions
-I've rewritten at every job to use in various utility scripts. By open
-sourcing them now, I'm hoping to not have to write them again.
+The logrus is a collection of random utility functions. Nothing in here is all that special, they're just yet another implementation of functions I've rewritten at every job to use in various utility scripts. By open sourcing them now, I'm hoping to not have to write them yet again.
 
 # Installation
 
@@ -23,7 +20,7 @@ Apache 2.0 license.
 
 ## human-time
 
-Takes a value in seconds either from stdin or as arg 1 and converts it to a more meat-friendly format using the humanTime function.
+Takes a value in seconds either from stdin or as arg 1 and converts it to a more meat-friendly format using the `humanTime` function.
 
 `human-time 1234` will print "20 minutes, 34 seconds"
 
@@ -68,16 +65,9 @@ if __name__ == '__main__':
 
 ### find_subcommand(args)
 
-Given a list ['foo','bar', 'baz'], attempts to create a command name in the
-format 'foo-bar-baz'. If that command exists, we run it. If it doesn't, we
-check to see if foo-bar exists, in which case we run `foo-bar baz`. We keep
-taking chunks off the end of the command name and adding them to the argument
-list until we find a valid command name we can run.
+Given a list ['foo','bar', 'baz'], attempts to create a command name in the format `foo-bar-baz`. If that command exists, we run it. If it doesn't, we check to see if `foo-bar` exists, in which case we run `foo-bar baz`. We keep slicing chunks off the end of the command name and adding them to the argument list until we find a valid command name we can run.
 
-This allows us to easily make git-style command drivers where for example we
-have a driver script, foo, and subcommand scripts foo-bar and foo-baz, and when
-the user types `foo bar foobar` we find the foo-bar script and run it as
-`foo-bar foobar`
+This allows us to easily make git-style command drivers where for example we have a driver script, `foo`, and subcommand scripts `foo-bar` and `foo-baz`, and when the user types `foo bar foobar` we find the foo-bar script and run it as `foo-bar foobar`
 
 Example usage:
 
@@ -122,8 +112,7 @@ if __name__ == '__main__':
 
 ### is_program(name)
 
-Search for a given program in `$PATH`, and return `True` if it exists and
-is executable.
+Search for a given program in `$PATH`, and return `True` if it exists and is executable.
 
 ### run(command)
 
