@@ -69,6 +69,7 @@ Example usage:
 #
 # Copyright 2019, Joe Block <jpb@unixorn.net>
 
+import sys
 from thelogrus.cli import exec_subcommand
 
 
