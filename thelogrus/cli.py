@@ -67,7 +67,7 @@ def exec_subcommand(unfound=_usage):
   args.insert(0, command)
   sys.stdout.flush()
   sys.stderr.flush()
-  os.execvp(command, args)
+  os.execvp(os.path.basename(command), args)
 
 
 def find_subcommand(args):
@@ -99,7 +99,7 @@ def find_subcommand(args):
   for i in range(len(args) - 1):
     command = '-'.join(args[:(len(args) - i)])
     command_arguments = args[len(args) - i:]
-    if is_program(command):
+    if is_program(os.path.basename(command)):
       return (command, command_arguments)
   raise RuntimeError("Could not find a subcommand executable for %s" % ' '.join(args))
 
