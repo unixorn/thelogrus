@@ -9,7 +9,6 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-- [logrus](#logrus)
 - [Installation](#installation)
 - [License](#license)
 - [Included Commands](#included-commands)
@@ -26,6 +25,7 @@
     - [humanTime(seconds)](#humantimeseconds)
   - [logrus.utils](#logrusutils)
     - [mkdir_p(path)](#mkdir_ppath)
+    - [obfuscateString(snippet, showLength=5, smear='*')](#obfuscatestringsnippet-showlength5-smear)
     - [squashDicts(*dict_args)](#squashdictsdict_args)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -160,6 +160,10 @@ Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime
 ### mkdir_p(path)
 
 os module doesn't have a `mkdir -p` equivalent so added one.
+
+### obfuscateString(snippet, showLength=5, smear='*')
+
+Takes a string, chops off showLength characters from the beginning and end and replaces everything else with the `smear` character. Really only useful for displaying just enough of a credential in a log to show it's using the correct credential, but not revealing the actual credential.
 
 ### squashDicts(*dict_args)
 

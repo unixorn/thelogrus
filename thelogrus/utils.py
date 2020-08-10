@@ -47,3 +47,17 @@ def squashDicts(*dict_args):
   for dictionary in dict_args:
     result.update(dictionary)
   return result
+
+def obfuscateString(snippet, showLength=5, smear='*'):
+  '''Obfuscate a string so we can show parts of it in debug log
+
+  :param str snippet: String to obfuscate
+  :param int showLength: How many characters _not_ to obscure and beginning and end of string
+  :param char smear: character to replace obscured characters with
+  '''
+  start = snippet[:int(showLength)]
+
+  trailing = snippet[(int(showLength)* -1):]
+
+  obscured = ( len(snippet) - (2 * showLength) ) * smear
+  return "%s%s%s" % (start, obscured, trailing)
