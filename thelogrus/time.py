@@ -20,6 +20,7 @@ Time utility functions
 import sys
 from dateutil.relativedelta import relativedelta
 
+
 def human_time(seconds):
   '''
   Convert seconds to something more human-friendly
