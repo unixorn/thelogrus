@@ -48,6 +48,7 @@ def squashDicts(*dict_args):
     result.update(dictionary)
   return result
 
+
 def obfuscateString(snippet, showLength=5, smear='*'):
   '''Obfuscate a string so we can show parts of it in debug log
 
