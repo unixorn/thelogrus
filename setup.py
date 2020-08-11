@@ -1,6 +1,6 @@
 # The Logrus
 #
-# Copyright 2015-2019 Joe Block <jpb@unixorn.net>
+# Copyright 2015-2020 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,10 @@
 # limitations under the License.
 
 '''
-logrus is a collection of utility functions.
+logrus is a collection of miscellaneous utility functions.
+
+Nothing in here is all that special, it's just some functions I use a lot
+and don't want to keep rewriting.
 '''
 
 import os
@@ -38,7 +41,7 @@ def run(command):
 
 
 PACKAGE_NAME = 'thelogrus'
-PACKAGE_VERSION = "0.3.%s" % (run('git rev-list HEAD --count').strip())
+PACKAGE_VERSION = "0.4.%s" % (run('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
