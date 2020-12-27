@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#
+# entrypoint script for logrus test container
+#
+# This script is Apache 2.0 licensed.
+
+set -o pipefail
+
+exec $@
