@@ -1,6 +1,6 @@
 # The Logrus
 #
-# Copyright 2015-2017 Joe Block <jpb@unixorn.net>
+# Copyright 2015-2021 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 # limitations under the License.
 
 '''
-logrus is a collection of utility functions.
+logrus3 is a collection of utility functions.
 '''
 
 import os
@@ -35,8 +35,8 @@ def systemCall(command):
   return p.stdout.read()
 
 
-name = 'logrus'
-version = "0.2.%s" % (systemCall('git rev-list HEAD --count').strip())
+name = 'logrus3'
+version = "0.4.%s" % (systemCall('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
@@ -68,15 +68,15 @@ setup(
   author="Joe Block",
   author_email="jpb@unixorn.net",
   description="The Logrus is a collection of random utility functions",
-  url="https://github.com/unixorn/logrus",
+  url="https://github.com/unixorn/logrus3",
   packages=find_packages(),
   version=version,
-  download_url="https://github.com/unixorn/logrus/tarball/%s" % version,
+  download_url="https://github.com/unixorn/logrus3/tarball/%s" % version,
   classifiers=[
     "Development Status :: 3 - Alpha",
     "Operating System :: POSIX",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 2.6",
+    "Programming Language :: Python :: 3.9",
     "Topic :: Software Development :: Libraries :: Python Modules",
   ],
   cmdclass={
@@ -87,5 +87,8 @@ setup(
       "human-time = %s.time:humanTimeConverter" % name,
     ]
   },
+  install_requires=[
+    'PyYAML',
+  ],
   keywords=["devops", "utility"],
 )

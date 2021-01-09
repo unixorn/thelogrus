@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
-# Copyright 2017-2020 Joe Block <jpb@unixorn.net>
+# Copyright 2017-2021 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -65,6 +65,7 @@ def mkdir_p(path):
   :param str path: directory to create
   '''
   assert isinstance(path, basestring), ("path must be a string but is %r" % path)
+
   try:
     os.makedirs(path)
   except OSError as exception:

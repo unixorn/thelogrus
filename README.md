@@ -1,9 +1,9 @@
 # logrus
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GitHub stars](https://img.shields.io/github/stars/unixorn/logrus.svg)](https://github.com/unixorn/logrus/stargazers)
-[![Code Climate](https://codeclimate.com/github/unixorn/logrus/badges/gpa.svg)](https://codeclimate.com/github/unixorn/logrus)
-[![Issue Count](https://codeclimate.com/github/unixorn/logrus/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/logrus)
+[![GitHub stars](https://img.shields.io/github/stars/unixorn/logrus3.svg)](https://github.com/unixorn/logrus/stargazers)
+[![Code Climate](https://codeclimate.com/github/unixorn/logrus/badges/gpa.svg)](https://codeclimate.com/github/unixorn/logrus3)
+[![Issue Count](https://codeclimate.com/github/unixorn/logrus3/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/logrus3)
 
 
 The logrus is a collection of random utility functions. Nothing in here
@@ -13,7 +13,7 @@ sourcing them now, I'm hoping to not have to write them again.
 
 # Installation
 
-`pip install logrus`
+`pip install logrus3`
 
 # License
 
@@ -29,20 +29,13 @@ Takes a value in seconds either from stdin or as arg 1 and converts it to a more
 
 # Included functions
 
-## logrus.cli
+## logrus3.cli
 
 ### findSubCommand(args)
 
-Given a list ['foo','bar', 'baz'], attempts to create a command name in the
-format 'foo-bar-baz'. If that command exists, we run it. If it doesn't, we
-check to see if foo-bar exists, in which case we run `foo-bar baz`. We keep
-taking chunks off the end of the command name and adding them to the argument
-list until we find a valid command name we can run.
+Given a list `['foo','bar', 'baz']`, attempts to create a command name in the format 'foo-bar-baz'. If that command exists, we run it. If it doesn't, we check to see if foo-bar exists, in which case we run `foo-bar baz`. We keep taking chunks off the end of the command name and adding them to the argument list until we find a valid command name we can run.
 
-This allows us to easily make git-style command drivers where for example we
-have a driver script, foo, and subcommand scripts foo-bar and foo-baz, and when
-the user types `foo bar foobar` we find the foo-bar script and run it as
-`foo-bar foobar`
+This allows us to easily make `git`-style command drivers where for example we have a driver script, foo, and subcommand scripts foo-bar and foo-baz, and when the user types `foo bar foobar` we find the foo-bar script and run it as `foo-bar foobar`
 
 :param list|tuple args: list to try and convert to a command args pair
 :returns: command and arguments list
@@ -88,13 +81,13 @@ is executable.
 :returns: whether or not the program can be found in $PATH
 :rtype: bool
 
-## logrus.time
+## logrus3.time
 
 ### humanTime(seconds)
 
 Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
 
-## logrus.utils
+## logrus3.utils
 
 ### getCustomLogger(name, logLevel)
 
@@ -111,3 +104,13 @@ os module doesn't have a `mkdir -p` equivalent so added one.
 ### squashDicts(*dict_args)
 
 Return a dict that is all the dict_args squashed together.
+
+## logrus3.yaml
+
+### readYamlFile(path)
+
+Read a yaml file.
+
+### writeYamlFile(path:str, data)
+
+Write a data structure to a yaml file.
