@@ -32,6 +32,8 @@
 
 The logrus is a collection of random utility functions. Nothing in here is all that special, they're just yet another implementation of functions I've rewritten at every job to use in various utility scripts. By open sourcing them now, I'm hoping to not have to write them yet again.
 
+And yes, the name is from Zelazny's Amber series.
+
 # Installation
 
 `pip install thelogrus`
@@ -50,7 +52,7 @@ Takes a value in seconds either from stdin or as arg 1 and converts it to a more
 
 # Included functions
 
-## logrus.cli
+## thelogrus.cli
 
 ### exec_subcommand(unfound)
 
@@ -143,19 +145,19 @@ Search for a given program in `$PATH`, and return `True` if it exists and is exe
 
 Runs a command (either a str or list) and returns its `stdout`.
 
-## logrus.logging
+## thelogrus.logging
 
 ### getCustomLogger(name, logLevel)
 
 Returns a custom logger with nicely formatted output.
 
-## logrus.time
+## thelogrus.time
 
 ### humanTime(seconds)
 
 Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
 
-## logrus.utils
+## thelogrus.utils
 
 ### mkdir_p(path)
 
@@ -168,3 +170,23 @@ Takes a string, chops off showLength characters from the beginning and end and r
 ### squashDicts(*dict_args)
 
 Return a dict that is all the dict_args squashed together.
+
+## thelogrus.yaml
+
+### readYamlFile(path: str)
+
+Return the data structure contained in a YAML file
+
+Args:
+    path (str): Path to read from
+
+Returns:
+    Data decoded from YAML file content
+
+### writeYamlFile(path: str, data):
+
+Writes a data structure or object into a YAML file
+
+Args:
+    path (str): Path to data file
+    data (any): Data to convert and write
