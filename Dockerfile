@@ -1,17 +1,11 @@
-FROM debian:buster-slim
-USER root
+FROM unixorn/debian-py3
 
-RUN apt-get update && \
-  apt-get install -y ca-certificates less vim zsh --no-install-recommends && \
-  apt-get install -y python3-pip git
+RUN mkdir -p /usr/local/bin && \
+  mkdir -p /code && \
+  mkdir -p /data
 
-RUN pip3 install pylint
-
-RUN mkdir -p /usr/local/bin
-
-COPY pylintrc /etc/pylintrc
-COPY test/* /usr/local/bin/
-
-RUN chmod 755 /usr/local/bin/*
+# COPY test/* /usr/local/bin/
+COPY dist/*whl /data
+RUN pip3 install --no-cache-dir /data/*.whl
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint"]

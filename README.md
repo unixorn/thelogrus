@@ -14,19 +14,22 @@
 - [Included Commands](#included-commands)
   - [human-time](#human-time)
 - [Included functions](#included-functions)
-  - [logrus.cli](#logruscli)
+  - [thelogrus.cli](#thelogruscli)
     - [exec_subcommand(unfound)](#exec_subcommandunfound)
     - [find_subcommand(args)](#find_subcommandargs)
     - [is_program(name)](#is_programname)
     - [run(command)](#runcommand)
-  - [logrus.logging](#logruslogging)
+  - [thelogrus.logging](#thelogruslogging)
     - [getCustomLogger(name, logLevel)](#getcustomloggername-loglevel)
-  - [logrus.time](#logrustime)
+  - [thelogrus.time](#thelogrustime)
     - [humanTime(seconds)](#humantimeseconds)
-  - [logrus.utils](#logrusutils)
+  - [thelogrus.utils](#thelogrusutils)
     - [mkdir_p(path)](#mkdir_ppath)
     - [obfuscateString(snippet, showLength=5, smear='*')](#obfuscatestringsnippet-showlength5-smear)
     - [squashDicts(*dict_args)](#squashdictsdict_args)
+  - [thelogrus.yaml](#thelogrusyaml)
+    - [readYamlFile(path: str)](#readyamlfilepath-str)
+  - [writeYamlFile(path: str, data)](#writeyamlfilepath-str-data)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -34,35 +37,35 @@ The logrus is a collection of random utility functions. Nothing in here is all t
 
 And yes, the name is from Zelazny's Amber series.
 
-# Installation
+## Installation
 
 `pip install thelogrus`
 
-# License
+## License
 
 Apache 2.0 license.
 
-# Included Commands
+## Included Commands
 
-## human-time
+### human-time
 
 Takes a value in seconds either from stdin or as arg 1 and converts it to a more meat-friendly format using the `humanTime` function.
 
 `human-time 1234` will print "20 minutes, 34 seconds"
 
-# Included functions
+## Included functions
 
-## thelogrus.cli
+### thelogrus.cli
 
-### exec_subcommand(unfound)
+#### exec_subcommand(unfound)
 
-Creates a `git`-style driver command. If your script is named `foo`, and is run as `foo bar baz` and there is an executable in your `$PATH` named `foo-bar`, it will call `foo-bar` with `baz` as the command line argument.
+Creates a `git`-style driver command. If your script is named `foo`, and is run as `foo bar baz` and there is an executable in your `$PATH` named `foo-bar`, it will call `foo-bar` with `baz` as the command-line argument.
 
 `unfound` is an optional argument that should be a function pointer and will be called if `exec_subcommand` can't find a suitable subcommand. Mainly useful for you to have a custom usage message.
 
 Example usage:
 
-```
+```python
 #!/usr/bin/env python3
 #
 # Test script for thelogrus
@@ -90,7 +93,7 @@ if __name__ == '__main__':
   exec_subcommand(unfound=_usage)
 ```
 
-### find_subcommand(args)
+#### find_subcommand(args)
 
 Given a list ['foo','bar', 'baz'], attempts to create a command name in the format `foo-bar-baz`. If that command exists, we run it. If it doesn't, we check to see if `foo-bar` exists, in which case we run `foo-bar baz`. We keep slicing chunks off the end of the command name and adding them to the argument list until we find a valid command name we can run.
 
@@ -98,7 +101,7 @@ This allows us to easily make git-style command drivers where for example we hav
 
 Example usage:
 
-```
+```python
 #!/usr/bin/env python3
 
 import os
@@ -137,43 +140,43 @@ if __name__ == '__main__':
   subcommander_driver()
 ```
 
-### is_program(name)
+#### is_program(name)
 
 Search for a given program in `$PATH`, and return `True` if it exists and is executable.
 
-### run(command)
+#### run(command)
 
 Runs a command (either a str or list) and returns its `stdout`.
 
-## thelogrus.logging
+### thelogrus.logging
 
-### getCustomLogger(name, logLevel)
+#### getCustomLogger(name, logLevel)
 
 Returns a custom logger with nicely formatted output.
 
-## thelogrus.time
+### thelogrus.time
 
-### humanTime(seconds)
+#### humanTime(seconds)
 
 Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
 
-## thelogrus.utils
+### thelogrus.utils
 
-### mkdir_p(path)
+#### mkdir_p(path)
 
 os module doesn't have a `mkdir -p` equivalent so added one.
 
-### obfuscateString(snippet, showLength=5, smear='*')
+#### obfuscateString(snippet, showLength=5, smear='*')
 
 Takes a string, chops off showLength characters from the beginning and end and replaces everything else with the `smear` character. Really only useful for displaying just enough of a credential in a log to show it's using the correct credential, but not revealing the actual credential.
 
-### squashDicts(*dict_args)
+#### squashDicts(*dict_args)
 
 Return a dict that is all the dict_args squashed together.
 
-## thelogrus.yaml
+### thelogrus.yaml
 
-### readYamlFile(path: str)
+#### readYamlFile(path: str)
 
 Return the data structure contained in a YAML file
 
@@ -183,7 +186,7 @@ Args:
 Returns:
     Data decoded from YAML file content
 
-### writeYamlFile(path: str, data):
+### writeYamlFile(path: str, data)
 
 Writes a data structure or object into a YAML file
 
