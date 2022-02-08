@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "thelogrus"
-version = "0.6.0"
+version = "0.6.2"
 license = "Apache 2.0"
 description = "The Logrus is a collection of random utility functions"
 authors = ["Joe Block <jpb@unixorn.net>"]
@@ -14,6 +14,7 @@ dateutils = "^0.6.12"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+flake8 = "^4.0.1"
 
 [tool.poetry.scripts]
 human-time = "thelogrus.time:human_time_converter"
