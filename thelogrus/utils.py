@@ -19,9 +19,7 @@ Random utility functions
 """
 
 import errno
-import logging
 import os
-import subprocess
 
 
 def mkdir_p(path):
