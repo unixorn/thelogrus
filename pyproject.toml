@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "thelogrus"
-version = "0.6.0"
+version = "0.6.2"
 license = "Apache 2.0"
 description = "The Logrus is a collection of random utility functions"
 authors = ["Joe Block <jpb@unixorn.net>"]
