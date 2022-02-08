@@ -28,7 +28,6 @@ def mkdir_p(path):
 
     :param str path: directory to create
     """
-    assert isinstance(path, basestring), "path must be a string but is %r" % path
     try:
         os.makedirs(path, exist_ok=True)
     except OSError as exception:

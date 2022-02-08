@@ -21,6 +21,7 @@ Utility functions for dealing with programs.
 
 import distutils.spawn
 import os
+import subprocess
 import sys
 
 

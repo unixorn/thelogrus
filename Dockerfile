@@ -1,9 +1,4 @@
 FROM unixorn/debian-py3
-USER root
-
-RUN apt-get update && \
-  apt-get install -y ca-certificates less vim zsh --no-install-recommends && \
-  apt-get install -y python3-pip git
 
 RUN mkdir -p /usr/local/bin && \
   mkdir -p /code && \
