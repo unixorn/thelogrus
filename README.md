@@ -29,7 +29,7 @@
     - [squashDicts(*dict_args)](#squashdictsdict_args)
   - [thelogrus.yaml](#thelogrusyaml)
     - [readYamlFile(path: str)](#readyamlfilepath-str)
-  - [writeYamlFile(path: str, data)](#writeyamlfilepath-str-data)
+    - [writeYamlFile(path: str, data)](#writeyamlfilepath-str-data)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -186,7 +186,7 @@ Args:
 Returns:
     Data decoded from YAML file content
 
-### writeYamlFile(path: str, data)
+#### writeYamlFile(path: str, data)
 
 Writes a data structure or object into a YAML file
 
