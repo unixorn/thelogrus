@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "thelogrus"
-version = "0.6.2"
+version = "0.6.3"
 license = "Apache 2.0"
 description = "The Logrus is a collection of random utility functions"
 authors = ["Joe Block <jpb@unixorn.net>"]
 homepage = "https://github.com/unixorn/thelogrus"
 repository = "https://github.com/unixorn/thelogrus"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
